@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block header %}
+<ul class="lightrope">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+{% endblock %}
+{% block main%}
+    <div class="logreg">
+        <h1>Регистрация</h1>
+        <div>
+            {% for error in errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+        <form action="" method="POST">
+            <div>
+                <label for="username">Пользователь:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="button_user">Зарегистрироваться</button>
+        </form>
+    </div>
+{% endblock %}

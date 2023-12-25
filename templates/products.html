@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block header %}
+<ul class="lightrope">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<section>
+    <div><form action="/rgz/products"><button class="button_header" type="submit">Товары</button></form></div>
+    <div><form action="/rgz/add_product"><button class="button_header" type="submit">Create</button></form></div>
+    <div><form action="/rgz/orders"><button class="button_header" type="submit">Заказы</button></form></div>
+    <div style="margin-left: 400px;"><form action="/rgz/create_order"><button class="button_header" type="submit">Корзина</button></form></div>
+    <div><form action="/rgz/logout"><button class="button_header" type="submit">Выйти</button></form></div>
+</section>
+{% endblock %}
+
+{% block main%}
+    <h2>Товары</h2>
+    <table>
+        <tr>
+            <th>Артикул</th>
+            <th>Имя</th>
+            <th>Количество</th>
+            <th>Удаление</th>
+            <th>Добавление в корзину</th>
+        </tr>
+        {% for product in products.items %}
+        <tr>
+            <td>{{ product.sku }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.quantity }}</td>
+            <td><button class="button_user" onclick="deleteProduct({{ product.id }})">Удалить</button></td>
+            <td><form method="POST" action="{{ url_for('rgz.add_to_cart', product_id=product.id) }}">
+                <input type="number" name="quantity" min="1" max="{{ product.quantity }}">
+                <button type="submit">Add to Cart</button>
+            </form></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% if products.has_prev %}
+        <a href="{{ url_for('products', page=products.prev_num) }}">Previous</a>
+    {% endif %}
+    {% if products.has_next %}
+        <a href="{{ url_for('products', page=products.next_num) }}">Next</a>
+    {% endif %}
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+    <script>
+        function deleteProduct(productId) {
+            fetch('/delete_product/' + productId, { method: 'POST' })
+                .then(response => window.location.reload())
+                .catch(error => console.error('Error:', error));
+        }
+        </script>        
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block header %}
+<ul class="lightrope">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+{% endblock %}
+
+{% block main%}
+    <div class="logreg">
+        <form id="loginForm" method="post">
+            <h1>Авторизация</h1>
+            <div>
+                {% for error in errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+            <div class="input_label">
+                <input type="text" id="username" name="username" value="{{ username or '' }}" placeholder="Пользователь">
+                <label for="username">Пользователь</label>
+            </div>
+            <div class="input_label">
+                <input type="password" id="password" name="password" value="{{ password or '' }}" placeholder="Пароль">
+                <label for="password">Пароль</label>
+            </div>
+            <div>
+                <button type="submit" class="button_user">Войти</button>
+            </div>
+            </form>
+    </div>
+{% endblock %}

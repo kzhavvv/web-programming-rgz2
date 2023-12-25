@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block header %}
+<ul class="lightrope">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+<section>
+    <div><form action="/rgz/products"><button class="button_header" type="submit">Товары</button></form></div>
+    <div><form action="/rgz/add_product"><button class="button_header" type="submit">Create</button></form></div>
+    <div><form action="/rgz/orders"><button class="button_header" type="submit">Заказы</button></form></div>
+    <div style="margin-left: 400px;"><form action="/rgz/create_order"><button class="button_header" type="submit">Корзина</button></form></div>
+    <div><form action="/rgz/logout"><button class="button_header" type="submit">Выйти</button></form></div>
+</section>
+{% endblock %}
+
+{% block main%}
+    <h1>Orders</h1>
+    <table>
+        <tr>
+            <th>Ордер ID</th>
+            <th>Статус</th>
+            <th>Действие</th>
+        </tr>
+        {% for order in zakazes %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.status }}</td>
+            <td>
+                {% if order.status == 'unpaid' %}
+                <form method="POST" action="{{ url_for('rgz.pay_order', order_id=order.id) }}">
+                    <button type="submit" class="button_user">Отметить как оплаченый</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
